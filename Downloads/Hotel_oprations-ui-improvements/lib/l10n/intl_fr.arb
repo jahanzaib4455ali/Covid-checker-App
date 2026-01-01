@@ -1,0 +1,27 @@
+{
+    "login": "Connexion",
+    "todayImportantNotices": "Avis importants du jour",
+    "chooseLanguage": "Choisir la langue",
+    "pleaseSelectYourLanguage": "Veuillez sélectionner votre langue",
+    
+    "createTask": "Créer une tâche",
+    "viewReports": "Voir les rapports",
+    "totalCheckIns": "Total des arrivées",
+    "totalCheckOuts": "Total des départs",
+    "totalBookings": "Total des réservations",
+    "totalRevenue": "Revenu total",
+    
+    "selectEmployee": "Sélectionner un employé",
+    "selectDepartment": "Sélectionner un département",
+    "selectTask": "Sélectionner une tâche",
+    "description": "Description",
+    "roomDustingOnly": "Nettoyage de la chambre uniquement",
+    "submit": "Soumettre",
+    
+    "reports": "Rapports",
+    "tasksReports": "Rapports des tâches",
+    "securityReport": "Rapport de sécurité",
+    "housekeepingReport": "Rapport de ménage",
+    "maintenanceReport": "Rapport de maintenance",
+    "laundryReport": "Rapport de blanchisserie"
+} 

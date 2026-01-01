@@ -1,0 +1,27 @@
+{
+    "login": "تسجيل الدخول",
+    "todayImportantNotices": "إشعارات اليوم المهمة",
+    "chooseLanguage": "اختر اللغة",
+    "pleaseSelectYourLanguage": "الرجاء اختيار لغتك",
+    
+    "createTask": "إنشاء مهمة",
+    "viewReports": "عرض التقارير",
+    "totalCheckIns": "إجمالي تسجيلات الدخول",
+    "totalCheckOuts": "إجمالي تسجيلات الخروج",
+    "totalBookings": "إجمالي الحجوزات",
+    "totalRevenue": "إجمالي الإيرادات",
+    
+    "selectEmployee": "اختر الموظف",
+    "selectDepartment": "اختر القسم",
+    "selectTask": "اختر المهمة",
+    "description": "الوصف",
+    "roomDustingOnly": "تنظيف الغرفة فقط",
+    "submit": "إرسال",
+    
+    "reports": "التقارير",
+    "tasksReports": "تقارير المهام",
+    "securityReport": "تقرير الأمن",
+    "housekeepingReport": "تقرير النظافة",
+    "maintenanceReport": "تقرير الصيانة",
+    "laundryReport": "تقرير الغسيل"
+} 

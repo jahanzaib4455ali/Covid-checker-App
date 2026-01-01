@@ -1,0 +1,129 @@
+{
+  "project": {
+    "name": "Kunggy Hotel Operations App",
+    "type": "flutter_mobile_application",
+    "version": "1.0.0+1",
+    "description": "Comprehensive hotel management system with role-based access control",
+    "domain": "hospitality_management"
+  },
+  "architecture": {
+    "pattern": "clean_architecture_with_bloc",
+    "layers": [
+      "presentation",
+      "domain", 
+      "data",
+      "service"
+    ],
+    "state_management": "bloc_pattern",
+    "dependency_injection": "get_it"
+  },
+  "technology_stack": {
+    "framework": "Flutter",
+    "language": "Dart",
+    "sdk_version": ">=3.4.1 <4.0.0",
+    "ui_framework": "Material 3",
+    "responsive_design": "flutter_screenutil",
+    "localization": "flutter_localization"
+  },
+  "modules": {
+    "authentication": {
+      "path": "lib/presentation/auth",
+      "features": ["login", "forgot_password", "role_selection"],
+      "screens": 6
+    },
+    "manager": {
+      "path": "lib/presentation/manager", 
+      "features": ["dashboard", "task_creation", "reports"],
+      "screens": 1
+    },
+    "housekeeping": {
+      "path": "lib/presentation/house_keeping",
+      "features": ["room_management", "amenities", "qr_scanning", "tasks"],
+      "screens": 5
+    },
+    "cook": {
+      "path": "lib/presentation/cook",
+      "features": ["order_management", "kitchen_operations"],
+      "screens": 2
+    },
+    "security": {
+      "path": "lib/presentation/security", 
+      "features": ["access_control", "vehicle_tracking", "guest_management"],
+      "screens": 5
+    },
+    "vendor": {
+      "path": "lib/presentation/vendor",
+      "features": ["order_history", "quotations", "supplier_management"],
+      "screens": 3
+    },
+    "room_service": {
+      "path": "lib/presentation/room_service",
+      "features": ["service_requests", "minibar_management"],
+      "screens": 2
+    },
+    "order_food": {
+      "path": "lib/presentation/order_food",
+      "features": ["menu_browsing", "cart_management", "order_processing"],
+      "screens": 4,
+      "state_management": "bloc_implemented"
+    },
+    "profile": {
+      "path": "lib/presentation/profile",
+      "features": ["user_settings", "language_preferences", "employee_rules"],
+      "screens": 6
+    }
+  },
+  "internationalization": {
+    "enabled": true,
+    "default_locale": "en",
+    "supported_locales": [
+      "en", "ar", "ur", "es", "fr", "de", "it", "pt",
+      "hi", "ta", "th", "vi", "zh", "ru", "id"
+    ],
+    "rtl_support": ["ar", "ur"],
+    "locale_files_path": "lib/l10n"
+  },
+  "routing": {
+    "total_routes": 42,
+    "navigation_pattern": "named_routes",
+    "route_file": "lib/utils/app_routes/routes.dart",
+    "deep_linking": false
+  },
+  "assets": {
+    "fonts": 6,
+    "font_families": [
+      "Plus Jakarta Sans",
+      "Visby Round CF", 
+      "Montserrat",
+      "WinkySans",
+      "Josefin Sans",
+      "Karla"
+    ],
+    "images_path": "assets/images/",
+    "icons_path": "assets/icons/"
+  },
+  "development": {
+    "environment": "Windows PowerShell",
+    "mcp_integration": true,
+    "testing_framework": "flutter_test",
+    "linting": "flutter_lints ^3.0.0"
+  },
+  "features": {
+    "qr_scanning": true,
+    "multi_language": true,
+    "role_based_access": true,
+    "real_time_operations": true,
+    "offline_capability": false,
+    "push_notifications": true,
+    "biometric_auth": false
+  },
+  "next_priorities": [
+    "Centralized error handling implementation",
+    "Enhanced API integration", 
+    "Unit and widget testing",
+    "Offline data synchronization",
+    "Push notification system",
+    "Biometric authentication",
+    "Performance optimization"
+  ]
+}

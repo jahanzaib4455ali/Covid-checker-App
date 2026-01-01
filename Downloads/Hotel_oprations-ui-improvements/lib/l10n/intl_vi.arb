@@ -1,0 +1,27 @@
+{
+    "login": "Đăng nhập",
+    "todayImportantNotices": "Thông báo quan trọng hôm nay",
+    "chooseLanguage": "Chọn ngôn ngữ",
+    "pleaseSelectYourLanguage": "Vui lòng chọn ngôn ngữ của bạn",
+    
+    "createTask": "Tạo nhiệm vụ",
+    "viewReports": "Xem báo cáo",
+    "totalCheckIns": "Tổng số check-in",
+    "totalCheckOuts": "Tổng số check-out",
+    "totalBookings": "Tổng số đặt phòng",
+    "totalRevenue": "Tổng doanh thu",
+    
+    "selectEmployee": "Chọn nhân viên",
+    "selectDepartment": "Chọn phòng ban",
+    "selectTask": "Chọn nhiệm vụ",
+    "description": "Mô tả",
+    "roomDustingOnly": "Chỉ quét dọn phòng",
+    "submit": "Gửi",
+    
+    "reports": "Báo cáo",
+    "tasksReports": "Báo cáo nhiệm vụ",
+    "securityReport": "Báo cáo an ninh",
+    "housekeepingReport": "Báo cáo dọn phòng",
+    "maintenanceReport": "Báo cáo bảo trì",
+    "laundryReport": "Báo cáo giặt là"
+} 

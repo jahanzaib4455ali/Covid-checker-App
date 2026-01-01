@@ -1,0 +1,27 @@
+{
+    "login": "Вход",
+    "todayImportantNotices": "Важные уведомления на сегодня",
+    "chooseLanguage": "Выбрать язык",
+    "pleaseSelectYourLanguage": "Пожалуйста, выберите ваш язык",
+    
+    "createTask": "Создать задачу",
+    "viewReports": "Просмотр отчетов",
+    "totalCheckIns": "Всего заездов",
+    "totalCheckOuts": "Всего выездов",
+    "totalBookings": "Всего бронирований",
+    "totalRevenue": "Общий доход",
+    
+    "selectEmployee": "Выбрать сотрудника",
+    "selectDepartment": "Выбрать отдел",
+    "selectTask": "Выбрать задачу",
+    "description": "Описание",
+    "roomDustingOnly": "Только уборка комнаты",
+    "submit": "Отправить",
+    
+    "reports": "Отчеты",
+    "tasksReports": "Отчеты по задачам",
+    "securityReport": "Отчет по безопасности",
+    "housekeepingReport": "Отчет по уборке",
+    "maintenanceReport": "Отчет по обслуживанию",
+    "laundryReport": "Отчет по прачечной"
+} 

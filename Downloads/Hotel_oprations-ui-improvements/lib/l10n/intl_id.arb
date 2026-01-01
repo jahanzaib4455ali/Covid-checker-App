@@ -1,0 +1,27 @@
+{
+    "login": "Masuk",
+    "todayImportantNotices": "Pengumuman Penting Hari Ini",
+    "chooseLanguage": "Pilih Bahasa",
+    "pleaseSelectYourLanguage": "Silakan pilih bahasa Anda",
+    
+    "createTask": "Buat Tugas",
+    "viewReports": "Lihat Laporan",
+    "totalCheckIns": "Total check-in",
+    "totalCheckOuts": "Total check-out",
+    "totalBookings": "Total pemesanan",
+    "totalRevenue": "Total pendapatan",
+    
+    "selectEmployee": "Pilih Karyawan",
+    "selectDepartment": "Pilih Departemen",
+    "selectTask": "Pilih Tugas",
+    "description": "Deskripsi",
+    "roomDustingOnly": "Hanya Pembersihan Kamar",
+    "submit": "Kirim",
+    
+    "reports": "Laporan",
+    "tasksReports": "Laporan Tugas",
+    "securityReport": "Laporan Keamanan",
+    "housekeepingReport": "Laporan Housekeeping",
+    "maintenanceReport": "Laporan Pemeliharaan",
+    "laundryReport": "Laporan Laundry"
+} 

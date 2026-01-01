@@ -1,0 +1,27 @@
+{
+    "login": "登录",
+    "todayImportantNotices": "今日重要通知",
+    "chooseLanguage": "选择语言",
+    "pleaseSelectYourLanguage": "请选择您的语言",
+    
+    "createTask": "创建任务",
+    "viewReports": "查看报告",
+    "totalCheckIns": "总入住",
+    "totalCheckOuts": "总退房",
+    "totalBookings": "总预订",
+    "totalRevenue": "总收入",
+    
+    "selectEmployee": "选择员工",
+    "selectDepartment": "选择部门",
+    "selectTask": "选择任务",
+    "description": "描述",
+    "roomDustingOnly": "仅房间除尘",
+    "submit": "提交",
+    
+    "reports": "报告",
+    "tasksReports": "任务报告",
+    "securityReport": "安全报告",
+    "housekeepingReport": "客房服务报告",
+    "maintenanceReport": "维护报告",
+    "laundryReport": "洗衣报告"
+} 

@@ -1,0 +1,27 @@
+{
+    "login": "உள்நுழைக",
+    "todayImportantNotices": "இன்றைய முக்கிய அறிவிப்புகள்",
+    "chooseLanguage": "மொழியைத் தேர்ந்தெடுக்கவும்",
+    "pleaseSelectYourLanguage": "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்",
+    
+    "createTask": "பணியை உருவாக்கு",
+    "viewReports": "அறிக்கைகளைக் காண்க",
+    "totalCheckIns": "மொத்த சேர்க்கைகள்",
+    "totalCheckOuts": "மொத்த வெளியேறல்கள்",
+    "totalBookings": "மொத்த முன்பதிவுகள்",
+    "totalRevenue": "மொத்த வருவாய்",
+    
+    "selectEmployee": "பணியாளரைத் தேர்ந்தெடுக்கவும்",
+    "selectDepartment": "துறையைத் தேர்ந்தெடுக்கவும்",
+    "selectTask": "பணியைத் தேர்ந்தெடுக்கவும்",
+    "description": "விளக்கம்",
+    "roomDustingOnly": "அறை தூசி நீக்குதல் மட்டும்",
+    "submit": "சமர்ப்பி",
+    
+    "reports": "அறிக்கைகள்",
+    "tasksReports": "பணி அறிக்கைகள்",
+    "securityReport": "பாதுகாப்பு அறிக்கை",
+    "housekeepingReport": "வீட்டு பராமரிப்பு அறிக்கை",
+    "maintenanceReport": "பராமரிப்பு அறிக்கை",
+    "laundryReport": "சலவை அறிக்கை"
+} 

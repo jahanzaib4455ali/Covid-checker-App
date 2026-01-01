@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree -L 2 \"F:\\New Volume\\Hotel_Oprations_app\\Hotel_Oprations_app\\kunggy-operation-flutter-main\\kunggy-operation-flutter\\lib\" -d)",
+      "Read(//f/New Volume/Vendor_Mobile_App/lib/app/theme/widgets/**)",
+      "Read(//f/New Volume/Vendor_Mobile_App/lib/app/theme/**)",
+      "Read(//f/New Volume/Vendor_Mobile_App/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

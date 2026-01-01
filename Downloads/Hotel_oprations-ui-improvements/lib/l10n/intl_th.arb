@@ -1,0 +1,27 @@
+{
+    "login": "เข้าสู่ระบบ",
+    "todayImportantNotices": "ประกาศสำคัญวันนี้",
+    "chooseLanguage": "เลือกภาษา",
+    "pleaseSelectYourLanguage": "กรุณาเลือกภาษาของคุณ",
+    
+    "createTask": "สร้างงาน",
+    "viewReports": "ดูรายงาน",
+    "totalCheckIns": "เช็คอินทั้งหมด",
+    "totalCheckOuts": "เช็คเอาท์ทั้งหมด",
+    "totalBookings": "การจองทั้งหมด",
+    "totalRevenue": "รายได้ทั้งหมด",
+    
+    "selectEmployee": "เลือกพนักงาน",
+    "selectDepartment": "เลือกแผนก",
+    "selectTask": "เลือกงาน",
+    "description": "คำอธิบาย",
+    "roomDustingOnly": "ทำความสะอาดห้องเท่านั้น",
+    "submit": "ส่ง",
+    
+    "reports": "รายงาน",
+    "tasksReports": "รายงานงาน",
+    "securityReport": "รายงานความปลอดภัย",
+    "housekeepingReport": "รายงานการทำความสะอาด",
+    "maintenanceReport": "รายงานการบำรุงรักษา",
+    "laundryReport": "รายงานซักรีด"
+} 
