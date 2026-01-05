@@ -1,6 +1,10 @@
 class MyIcons {
   static const String _basePath = 'assets/icons';
-
+  static const String dashboard = "$_basePath/Dashboard.svg";
+  static const String layer = "$_basePath/Layer.svg";
+  static const String toiletries = "$_basePath/Toiletries.svg";
+  static const String minibarRefill = "$_basePath/MinibarRefill.svg";
+  static const String broadcastIcon = '$_basePath/Group1000011602.svg';
   static const String voiceChat = "$_basePath/voiceChat.svg";
   static const String housekeeping = "$_basePath/housekeeping.svg";
   static const String roomservice = "$_basePath/roomservice.svg";

@@ -12,223 +12,99 @@ class RevenueReportScreen extends StatefulWidget {
 }
 
 class _RevenueReportScreenState extends State<RevenueReportScreen> {
-  // Sample data for the table
-  final List<Map<String, dynamic>> tableData = [
-    {
-      'date': '6-4-2025',
+  // Screenshot ke mutabiq data
+  final List<Map<String, dynamic>> tableData = List.generate(
+    6,
+        (index) => {
+      'date': '6-6-2025',
       'bookings': '298',
       'revenue': '\$79,985',
       'occupancy': '94%',
     },
-    {
-      'date': '6-4-2025',
-      'bookings': '298',
-      'revenue': '\$79,985',
-      'occupancy': '94%',
-    },
-    {
-      'date': '6-4-2025',
-      'bookings': '298',
-      'revenue': '\$79,985',
-      'occupancy': '94%',
-    },
-    {
-      'date': '6-4-2025',
-      'bookings': '298',
-      'revenue': '\$79,985',
-      'occupancy': '94%',
-    },
-    {
-      'date': '6-4-2025',
-      'bookings': '298',
-      'revenue': '\$79,985',
-      'occupancy': '94%',
-    },
-    {
-      'date': '6-4-2025',
-      'bookings': '298',
-      'revenue': '\$79,985',
-      'occupancy': '94%',
-    },
-  ];
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.whiteFFFFFF,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: MyColors.whiteFFFFFF,
+        backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: MyColors.dark000000),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: TextView(
-          'Revenue Report',
-          style: myTextStyle.font_18w600.copyWith(color: MyColors.dark000000),
-        ),
-        actions: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            decoration: BoxDecoration(
-              border: Border.all(color: MyColors.grayD0D5DD),
-              borderRadius: BorderRadius.circular(10),
+        leadingWidth: 70.w,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10.w),
+          child: IconButton(
+            icon: const CircleAvatar(
+              backgroundColor: Color(0xFFF2F4F7),
+              child: Icon(Icons.arrow_back, color: Colors.black, size: 20),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.calendar_today, size: 16.w, color: MyColors.dark000000),
-                SizedBox(width: 5.w),
-                TextView(
-                  "11-01-2023",
-                  style: myTextStyle.font_12w400.copyWith(color: MyColors.dark000000),
-                ),
-              ],
-            ),
+            onPressed: () => Navigator.pop(context),
           ),
+        ),
+        title: Text("Reports", style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800, color: Colors.black)),
+        actions: [
+          const Icon(Icons.search, color: Colors.black),
+          SizedBox(width: 10.w),
+          const Icon(Icons.tune, color: Colors.black),
+          SizedBox(width: 10.w),
+          _buildDateFilter(),
+          SizedBox(width: 15.w),
         ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Search Bar
-          Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search",
-                      hintStyle: myTextStyle.font_14w400.copyWith(color: MyColors.gray9F9F9F),
-                      prefixIcon: const Icon(Icons.search, color: MyColors.gray9F9F9F),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: MyColors.grayF7F7F7,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                Container(
-                  padding: EdgeInsets.all(8.w),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: MyColors.grayD0D5DD),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(Icons.tune, size: 20.w, color: MyColors.gray9F9F9F),
-                ),
-              ],
-            ),
-          ),
+
 
           // Table Title
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             child: TextView(
               'Revenue Report Table',
-              style: myTextStyle.font_18w600.copyWith(color: MyColors.dark000000),
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
             ),
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: 10.h),
 
           // Table Header
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.w),
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            decoration: BoxDecoration(
+            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
+            decoration: const BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: MyColors.grayE5E5E5, width: 1),
+                top: BorderSide(color: Color(0xFFEAECF0)),
+                bottom: BorderSide(color: Color(0xFFEAECF0)),
               ),
             ),
             child: Row(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: TextView(
-                    'Date',
-                    style: myTextStyle.font_14w600.copyWith(color: MyColors.gray9F9F9F),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextView(
-                    'Bookings',
-                    style: myTextStyle.font_14w600.copyWith(color: MyColors.gray9F9F9F),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextView(
-                    'Revenue',
-                    style: myTextStyle.font_14w600.copyWith(color: MyColors.gray9F9F9F),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextView(
-                    'Occupancy',
-                    style: myTextStyle.font_14w600.copyWith(color: MyColors.gray9F9F9F),
-                    textAlign: TextAlign.end,
-                  ),
-                ),
+                _headerCell('Date', flex: 3),
+                _headerCell('Bookings', flex: 2),
+                _headerCell('Revenue', flex: 3),
+                _headerCell('Occupancy', flex: 2),
               ],
             ),
           ),
 
-          // Table Data
+          // Table Data List
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: ListView.separated(
               itemCount: tableData.length,
+              separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFEAECF0)),
               itemBuilder: (context, index) {
                 final data = tableData[index];
-                return Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: MyColors.grayEFEFEF, width: 1),
-                    ),
-                  ),
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 20.w),
                   child: Row(
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: TextView(
-                          data['date'],
-                          style: myTextStyle.font_14w500.copyWith(color: MyColors.dark000000),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: TextView(
-                          data['bookings'],
-                          style: myTextStyle.font_14w500.copyWith(color: MyColors.dark000000),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: TextView(
-                          data['revenue'],
-                          style: myTextStyle.font_14w500.copyWith(color: MyColors.dark000000),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: TextView(
-                          data['occupancy'],
-                          style: myTextStyle.font_14w500.copyWith(color: MyColors.dark000000),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
+                      _dataCell(data['date'], flex: 3, isBold: true),
+                      _dataCell(data['bookings'], flex: 2),
+                      _dataCell(data['revenue'], flex: 3),
+                      _dataCell(data['occupancy'], flex: 2),
                     ],
                   ),
                 );
@@ -236,6 +112,57 @@ class _RevenueReportScreenState extends State<RevenueReportScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDateFilter() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+      margin: EdgeInsets.symmetric(vertical: 8.h),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color(0xFFD0D5DD)),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.calendar_today_outlined, size: 14.sp, color: Colors.black),
+          SizedBox(width: 6.w),
+          Text(
+            "11-01-2023",
+            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
+  Widget _headerCell(String text, {required int flex}) {
+    return Expanded(
+      flex: flex,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: const Color(0xFF667085),
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _dataCell(String text, {required int flex, bool isBold = false}) {
+    return Expanded(
+      flex: flex,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: Colors.black,
+          fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
+        ),
       ),
     );
   }

@@ -3,17 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart';
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/presentation/manager/view/screens/reminder_list_screen.dart';
-import 'package:kunggy_operational_app/presentation/manager/view/screens/roaster_list_screen.dart';
-import 'package:kunggy_operational_app/presentation/manager/view/screens/shift_list_screen.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
-import 'package:kunggy_operational_app/presentation/manager/tasks/view/unified_task_screen.dart';
 
-import 'access_list_screen.dart';
+
 import 'alert_list_screen.dart';
-import 'approval_list_screen.dart';
 import 'employee_summary_screen.dart';
-import 'guest_review_screen.dart';
+import 'my_task_screen.dart';
+import 'revenue_report_screen.dart';
 
 class ManageScreen extends StatelessWidget {
   const ManageScreen({super.key});
@@ -34,7 +31,7 @@ class ManageScreen extends StatelessWidget {
               "Management",
               style: TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
-                fontSize: 30.sp,
+                fontSize: 25.sp,
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
               ),
@@ -56,7 +53,7 @@ class ManageScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const UnifiedTaskScreen()),
+                        MaterialPageRoute(builder: (context) => MyTaskScreen()),
                       );
                     },
                   ),
@@ -95,59 +92,45 @@ class ManageScreen extends StatelessWidget {
                   ),
                   _buildManageItem(
                     context,
-                    title: "Shift Management",
-                    description: "Organize staff work hours, assign shifts, and ensure proper duty coverage.",
+                    title: "Reports",
+                    description: "View key business metrics, financial summaries, and operational reports.",
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ShiftListScreen()),
+                        MaterialPageRoute(builder: (context) => const RevenueReportScreen()),
                       );
                     },
+                  ),
+                  _buildManageItem(
+                    context,
+                    title: "Shift Management",
+                    description: "Organize staff work hours, assign shifts, and ensure proper duty coverage.",
+                    onTap: () {},
                   ),
                   _buildManageItem(
                     context,
                     title: "Roaster Management",
                     description: "Create and manage staff duty schedules to ensure proper shift coverage and workload balance.",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RoasterListScreen()),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   _buildManageItem(
                     context,
                     title: "Approval Request",
                     description: "Review and approve pending requests such as leaves, tasks, or exceptions.",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ApprovalListScreen()),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   _buildManageItem(
                     context,
                     title: "Access Request",
                     description: "Review or approve request to gain necessary access or authorization",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const AccessListScreen()),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   _buildManageItem(
                     context,
                     title: "Guest Review",
                     description: "View and manage feedback or ratings shared by guests",
                     showDivider: false,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const GuestReviewScreen()),
-                      );
-                    },
+                    onTap: () {},
                   ),
                   
                   SizedBox(height: 40.h),
@@ -181,19 +164,19 @@ class ManageScreen extends StatelessWidget {
             title,
             style: TextStyle(
               fontFamily: 'Plus Jakarta Sans',
-              fontSize: 22.sp,
-              fontWeight: FontWeight.w700,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w800,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 6.h),
           TextView(
             description,
             style: TextStyle(
               fontFamily: 'Plus Jakarta Sans',
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xFF667085),
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFF64748B),
             ),
           ),
           SizedBox(height: 16.h),

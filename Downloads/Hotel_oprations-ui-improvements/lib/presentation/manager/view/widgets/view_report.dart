@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
-import 'package:kunggy_operational_app/presentation/manager/reports/view/revenue_report_screen.dart';
+
 import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart';
+
+import '../screens/revenue_report_screen.dart';
 
 class ViewReportsScreen extends StatefulWidget {
   const ViewReportsScreen({super.key});

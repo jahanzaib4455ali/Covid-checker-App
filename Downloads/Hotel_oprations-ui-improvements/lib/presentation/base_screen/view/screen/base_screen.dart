@@ -4,7 +4,8 @@ import 'package:kunggy_operational_app/presentation/base_screen/view/widget/scre
 import 'package:kunggy_operational_app/presentation/base_screen/view/widget/bottom_nav_item.dart';
 import 'package:kunggy_operational_app/theme/my_icons.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../manager/home/view/manager_dashboard.dart';	// adjust the path as needed
+import '../../../manager/view/screens/manager_dashboard.dart';
+
 
 class CookBaseScreen extends StatefulWidget {
   static const String route = "CookBaseScreen";

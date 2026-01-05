@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kunggy_operational_app/presentation/base_screen/view/screen/module_base_screen.dart';
 import 'package:kunggy_operational_app/presentation/base_screen/view/widget/bottom_nav_item.dart';
 import 'package:kunggy_operational_app/theme/my_icons.dart';
-import '../../../manager/home/view/manager_dashboard.dart';
-import '../../../manager/reports/widgets/view_report.dart';
-import '../../../manager/home/view/kips_screen.dart';
-import '../../../manager/home/view/manage_screen.dart';
+import '../../../manager/view/screens/kips_screen.dart';
+import '../../../manager/view/screens/manage_screen.dart';
+import '../../../manager/view/screens/manager_dashboard.dart';
+import '../../../manager/view/widgets/view_report.dart';
 
 class ManagerBaseScreen extends StatelessWidget {
   ManagerBaseScreen({super.key});

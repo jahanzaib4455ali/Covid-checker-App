@@ -5,9 +5,9 @@ import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_icons.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
-import 'package:kunggy_operational_app/presentation/manager/notifications/view/manager_notifications_screen.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../presentation/manager/view/screens/manager_notifications_screen.dart';
 
 class GeneralAppBar extends StatelessWidget {
   const GeneralAppBar(

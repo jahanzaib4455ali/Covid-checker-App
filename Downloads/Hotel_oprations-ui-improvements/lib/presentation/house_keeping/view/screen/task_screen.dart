@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kunggy_operational_app/common/widget/general_scaffold.dart';
+import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart';
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
@@ -16,31 +16,15 @@ class TaskScreen extends StatefulWidget {
   State<TaskScreen> createState() => _TaskScreenState();
 }
 
-class _TaskScreenState extends State<TaskScreen> with SingleTickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    tabController = TabController(length: 3, vsync: this);
-    tabController.addListener(() {
-      if (tabController.indexIsChanging) {
-        setState(() {});
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+class _TaskScreenState extends State<TaskScreen> {
+  int selectedIndex = 0; // Track selected button
+  final List<String> tabTitles = ["Incoming", "My Task", "Completed"];
 
   @override
   Widget build(BuildContext context) {
-    return GeneralScaffold(
+    return SrcGeneralScaffold(
       isBackButton: false,
-      isProfile: false,
+      showAppBar: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -49,62 +33,106 @@ class _TaskScreenState extends State<TaskScreen> with SingleTickerProviderStateM
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: TextView(
               "Tasks",
-              style: myTextStyle.font_18w600.copyWith(fontSize: 22.sp),
+              style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, color: Colors.black),
             ),
           ),
+          // Separate buttons instead of TabBar
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-            child: Container(
-              height: 45.h,
-              padding: EdgeInsets.all(4.w),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF2F2F2),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: TabBar(
-                controller: tabController,
-                indicatorSize: TabBarIndicatorSize.tab,
-                dividerColor: Colors.transparent,
-                indicator: BoxDecoration(
-                  color: MyColors.primaryDark1D1929,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.black54,
-                labelStyle: myTextStyle.font_14w500,
-                tabs: const [
-                  Tab(text: "Incoming"),
-                  Tab(text: "My Task"),
-                  Tab(text: "Completed"),
-                ],
+            child: Row(
+              children: List.generate(3, (index) => 
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: index < 2 ? 8.w : 0),
+                    child: _buildTabButton(
+                      tabTitles[index], 
+                      selectedIndex == index,
+                      () => setState(() => selectedIndex = index)
+                    ),
+                  ),
+                )
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
             child: Row(
               children: [
-                TextView("Filter", style: myTextStyle.font_14w400.copyWith(color: Colors.grey)),
+                TextView(
+                  "Filter", 
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF667085),
+                  ),
+                ),
                 const Spacer(),
-                Icon(Icons.search, size: 22.sp, color: Colors.black54),
-                SizedBox(width: 15.w),
-                Icon(Icons.swap_vert, size: 22.sp, color: Colors.black54),
+                Icon(
+                  Icons.search_outlined, 
+                  size: 20.sp, 
+                  color: const Color(0xFF667085),
+                ),
+                SizedBox(width: 12.w),
+                Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFFD0D5DD)),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Icon(
+                    Icons.tune, 
+                    size: 20.sp, 
+                    color: const Color(0xFF667085),
+                  ),
+                ),
               ],
             ),
           ),
           Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                const TaskListView(type: "Incoming"),
-                const TaskListView(type: "My Task"),
-                const TaskListView(type: "Completed"),
-              ],
-            ),
+            child: _buildCurrentTabView(),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildTabButton(String title, bool isSelected, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 45.h,
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF2D2D3A) : Colors.transparent,
+          borderRadius: BorderRadius.circular(25.r),
+          border: Border.all(
+            color: isSelected ? const Color(0xFF2D2D3A) : const Color(0xFFE0E0E0),
+            width: 1.5,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: TextView(
+          title,
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: isSelected ? Colors.white : const Color(0xFF667085),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCurrentTabView() {
+    switch (selectedIndex) {
+      case 0:
+        return const TaskListView(type: "Incoming");
+      case 1:
+        return const TaskListView(type: "My Task");
+      case 2:
+        return const TaskListView(type: "Completed");
+      default:
+        return const TaskListView(type: "Incoming");
+    }
   }
 }
 
@@ -153,7 +181,7 @@ class TaskDataCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextView("Housekeeping Task", style: myTextStyle.font_14w600),
+                  TextView("Housekeeping Task", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black)),
                   SizedBox(height: 5.h),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
@@ -163,9 +191,10 @@ class TaskDataCard extends StatelessWidget {
                     ),
                     child: TextView(
                       isCompleted ? "Urgent" : (isDusting ? "Normal" : "Urgent"),
-                      style: myTextStyle.font_12w500.copyWith(
+                      style: TextStyle(
                         color: isCompleted ? Colors.red : (isDusting ? Colors.green : Colors.red),
-                        fontSize: 11.sp,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -179,22 +208,25 @@ class TaskDataCard extends StatelessWidget {
                   color: const Color(0xFFE8F5E9),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: TextView("Completed", style: myTextStyle.font_12w500.copyWith(color: Colors.green, fontSize: 10.sp)),
+                child: TextView("Completed", style: TextStyle(color: Colors.green, fontSize: 16.sp, fontWeight: FontWeight.w500)),
               )
-                  : Container(
-                width: 75.w,
-                padding: EdgeInsets.symmetric(vertical: 5.h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: [
-                    TextView("5:00", style: myTextStyle.font_14w600),
-                    TextView(isMyTask ? "Task Time" : "Response Time",
-                        style: myTextStyle.font_10w400.copyWith(fontSize: 8.sp, color: Colors.grey)),
-                  ],
-                ),
+                  : Column(
+                children: [
+                  Container(
+                    width: 120.w,
+                    padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300, width: 2),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Center(
+                      child: TextView("5:00", style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  TextView(isMyTask ? "Task Time" : "Response Time",
+                      style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.grey)),
+                ],
               )
             ],
           ),
@@ -215,10 +247,10 @@ class TaskDataCard extends StatelessWidget {
           // Notes Section
           if (!isDusting && !isMyTask) ...[
             SizedBox(height: 10.h),
-            TextView("Note", style: myTextStyle.font_12w400),
+            TextView("Note", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Colors.grey)),
             TextView(
               "Coffee mug has slipped and whole coffee is on the floor...",
-              style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600, fontSize: 11.sp),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp, fontWeight: FontWeight.w400),
             ),
           ],
 
@@ -233,9 +265,9 @@ class TaskDataCard extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 100.w,
-                    child: TextView("Guest Rating", style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600)),
+                    child: TextView("Guest Rating", style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp, fontWeight: FontWeight.w400)),
                   ),
-                  TextView(":", style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600)),
+                  TextView(":", style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp, fontWeight: FontWeight.w400)),
                   SizedBox(width: 10.w),
                   Row(
                     children: List.generate(5, (starIndex) => Icon(
@@ -290,7 +322,7 @@ class TaskDataCard extends StatelessWidget {
                     backgroundColor: MyColors.primaryDark1D1929,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
-                  child: TextView("Accept", style: myTextStyle.font_14w500.copyWith(color: Colors.white)),
+                  child: TextView("Accept", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.white)),
                 ),
               ),
             ),
@@ -314,9 +346,10 @@ class TaskDataCard extends StatelessWidget {
           ),
           child: TextView(
             text,
-            style: myTextStyle.font_12w500.copyWith(
+            style: TextStyle(
               color: isOutline ? Colors.black87 : Colors.white,
-              fontSize: 11.sp,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
             ),
             maxLines: 1,
           ),
@@ -332,11 +365,11 @@ class TaskDataCard extends StatelessWidget {
         children: [
           SizedBox(
             width: 100.w,
-            child: TextView(label, style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600)),
+            child: TextView(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp, fontWeight: FontWeight.w400)),
           ),
-          TextView(":", style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600)),
+          TextView(":", style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp, fontWeight: FontWeight.w400)),
           SizedBox(width: 10.w),
-          Expanded(child: TextView(value, style: myTextStyle.font_12w500)),
+          Expanded(child: TextView(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black))),
         ],
       ),
     );

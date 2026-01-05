@@ -26,7 +26,7 @@ import 'package:kunggy_operational_app/presentation/splash/screen/splash_screen.
 import 'package:kunggy_operational_app/presentation/vendor/view/screens/quote_price_screen.dart';
 import 'package:kunggy_operational_app/presentation/vendor/view/screens/vendor_screen.dart';
 import 'package:kunggy_operational_app/presentation/order_food/view/screens/order_info.dart';
-import 'package:kunggy_operational_app/presentation/manager/home/view/manager_dashboard.dart';
+import 'package:kunggy_operational_app/presentation/manager/view/screens/manager_dashboard.dart';
 import 'package:kunggy_operational_app/presentation/profile/view/screen/setting_screen.dart';
 import 'package:kunggy_operational_app/presentation/profile/view/screen/employee_rules.dart';
 // import 'package:kunggy_operational_app/presentation/profile/view/screen/employee_rules.dart';

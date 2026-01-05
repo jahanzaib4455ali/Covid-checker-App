@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kunggy_operational_app/common/widget/general_scaffold.dart';
+import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart';
 
 import '../../../../common/widget/text_view.dart';
 import '../../../../theme/my_colors.dart';
@@ -12,9 +12,9 @@ class AmenitiesStockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GeneralScaffold(
+    return SrcGeneralScaffold(
       isBackButton: false,
-      isProfile: true,
+      showAppBar: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,7 +24,7 @@ class AmenitiesStockScreen extends StatelessWidget {
                 'Amenities Stock',
                 style: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
-                  fontSize: 24.sp,
+                  fontSize: 30.sp,
                   fontWeight: FontWeight.w700,
                   color: MyColors.dark000000,
                 ),
@@ -51,7 +51,7 @@ class AmenitiesStockScreen extends StatelessWidget {
                             child: TextField(
                               decoration: InputDecoration(
                                 hintText: 'Search',
-                                hintStyle: myTextStyle.font_14w400.copyWith(color: MyColors.gray667085),
+                                hintStyle: TextStyle(color: MyColors.gray667085, fontSize: 16.sp, fontWeight: FontWeight.w400),
                                 border: InputBorder.none,
                                 isDense: true,
                               ),
@@ -82,8 +82,8 @@ class AmenitiesStockScreen extends StatelessWidget {
                 'Amenities List',
                 style: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
                   color: MyColors.dark000000,
                 ),
               ),
@@ -143,8 +143,8 @@ class AmenitiesStockScreen extends StatelessWidget {
                         item['name'],
                         style: TextStyle(
                           fontFamily: 'Plus Jakarta Sans',
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
                           color: MyColors.dark000000,
                         ),
                       ),
@@ -153,7 +153,7 @@ class AmenitiesStockScreen extends StatelessWidget {
                       flex: 2,
                       child: TextView(
                         '${item['assigned']}',
-                        style: myTextStyle.font_14w500,
+                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -161,7 +161,7 @@ class AmenitiesStockScreen extends StatelessWidget {
                       flex: 2,
                       child: TextView(
                         '${item['refilled']}',
-                        style: myTextStyle.font_14w500,
+                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -169,7 +169,7 @@ class AmenitiesStockScreen extends StatelessWidget {
                       flex: 2,
                       child: TextView(
                         '${item['available']}',
-                        style: myTextStyle.font_14w500,
+                        style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -189,8 +189,8 @@ class AmenitiesStockScreen extends StatelessWidget {
       textAlign: align,
       style: TextStyle(
         fontFamily: 'Plus Jakarta Sans',
-        fontSize: 12.sp,
-        fontWeight: FontWeight.w500,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
         color: MyColors.gray667085,
       ),
     );

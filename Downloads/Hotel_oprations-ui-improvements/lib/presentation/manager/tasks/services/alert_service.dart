@@ -1,4 +1,4 @@
-import '../models/alert_model.dart';
+import '../../models/alert_model.dart';
 
 class AlertService {
   static final AlertService _instance = AlertService._internal();

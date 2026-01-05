@@ -21,22 +21,22 @@ class HousekeepingBaseScreen extends StatelessWidget {
     // Screenshot ke mutabiq labels aur items:
     final navItems = [
       BottomNavItem(
-          icon: MyIcons.manager, // Dashboard Icon
+          icon: MyIcons.dashboard, // Dashboard Icon
           label: 'Dashboard',
           screen: const HousekeepingDashboard()
       ),
       BottomNavItem(
-          icon: MyIcons.manager, // Tasks Icon
+          icon: MyIcons.layer, // Tasks Icon
           label: 'Tasks',
           screen: const TaskScreen()
       ),
       BottomNavItem(
-          icon: MyIcons.manager, // Minibar Icon
+          icon: MyIcons.minibarRefill, // Minibar Icon
           label: 'Minibar Refill',
           screen: const MinibarStockScreen()
       ),
       BottomNavItem(
-          icon: MyIcons.manager, // Amenities Icon
+          icon: MyIcons.toiletries, // Amenities Icon
           label: 'Room Amenities',
           screen: const AmenitiesStockScreen()
       ),

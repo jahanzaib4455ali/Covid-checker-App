@@ -4,19 +4,18 @@ import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
 
-class CreateAccessScreen extends StatefulWidget {
-  const CreateAccessScreen({super.key});
+class CreateLeaveScreen extends StatefulWidget {
+  const CreateLeaveScreen({super.key});
 
   @override
-  State<CreateAccessScreen> createState() => _CreateAccessScreenState();
+  State<CreateLeaveScreen> createState() => _CreateLeaveScreenState();
 }
 
-class _CreateAccessScreenState extends State<CreateAccessScreen> {
+class _CreateLeaveScreenState extends State<CreateLeaveScreen> {
   String selectedEmployee = "Select Employee";
-  String selectedDepartment = "Select Department";
-  String selectedAccessType = "System Access";
-  String requestedAccess = "Enter Access Details";
-  String reason = "Enter Reason";
+  String selectedLeaveType = "Sick Leave";
+  String duration = "2 Days";
+  String reason = "Medical Checkup";
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class _CreateAccessScreenState extends State<CreateAccessScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: TextView(
-          "Grant Access",
+          "Grant Leave",
           style: myTextStyle.font_18w600.copyWith(color: MyColors.dark000000),
         ),
       ),
@@ -49,31 +48,21 @@ class _CreateAccessScreenState extends State<CreateAccessScreen> {
             SizedBox(height: 20.h),
             
             _buildDropdownField(
-              "Department",
-              selectedDepartment,
-              ["Housekeeping", "Kitchen", "Security", "Reception"],
-              (value) => setState(() => selectedDepartment = value!),
+              "Leave Type",
+              selectedLeaveType,
+              ["Sick Leave", "Casual Leave", "Annual Leave", "Unpaid Leave"],
+              (value) => setState(() => selectedLeaveType = value!),
             ),
             
             SizedBox(height: 20.h),
             
-            _buildDropdownField(
-              "Access Type",
-              selectedAccessType,
-              ["System Access", "Area Access", "Admin Access", "Module Access"],
-              (value) => setState(() => selectedAccessType = value!),
+             _buildTextField(
+              "Duration (Days)",
+              duration,
+              (value) => setState(() => duration = value),
             ),
-            
-            SizedBox(height: 20.h),
-            
-            _buildTextField(
-              "Requested Access",
-              requestedAccess,
-              (value) => setState(() => requestedAccess = value),
-            ),
-            
-            SizedBox(height: 20.h),
-            
+             SizedBox(height: 20.h),
+
             _buildTextField(
               "Reason",
               reason,
@@ -87,13 +76,13 @@ class _CreateAccessScreenState extends State<CreateAccessScreen> {
               width: double.infinity,
               height: 50.h,
               child: ElevatedButton(
-                onPressed: () => _showAccessConfirmationSheet(context),
+                onPressed: () => _showLeaveConfirmationSheet(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.primaryDark1D1929,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 child: TextView(
-                  "Grant Access",
+                  "Approve Leave",
                   style: myTextStyle.font_16ww700.copyWith(color: MyColors.whiteFFFFFF),
                 ),
               ),
@@ -101,6 +90,84 @@ class _CreateAccessScreenState extends State<CreateAccessScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showLeaveConfirmationSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Center(
+                child: TextView(
+                  "Confirm Leave Approval",
+                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              _buildSummaryRow("Employee", selectedEmployee),
+              _divider(),
+              _buildSummaryRow("Leave Type", selectedLeaveType),
+              _divider(),
+              _buildSummaryRow("Duration", duration),
+              _divider(),
+              _buildSummaryRow("Key Impact", "45 Expected Guests"),
+              
+              SizedBox(height: 10.h),
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 20.sp),
+                    SizedBox(width: 8.w),
+                    Expanded(child: TextView("Warning: High guest volume expected during this period.", style: TextStyle(fontSize: 12.sp, color: Colors.orange[800]))),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 30.h),
+              SizedBox(
+                width: double.infinity,
+                height: 52.h,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close sheet
+                    Navigator.pop(context); // Close screen
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1D1929),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                  ),
+                  child: Text("Confirm Approval", style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -166,71 +233,6 @@ class _CreateAccessScreenState extends State<CreateAccessScreen> {
           onChanged: onChanged,
         ),
       ],
-    );
-  }
-
-
-  void _showAccessConfirmationSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40.w,
-                  height: 4.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2.r),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.h),
-              Center(
-                child: TextView(
-                  "Confirm Access Grant",
-                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-              ),
-              SizedBox(height: 20.h),
-              _buildSummaryRow("Employee", selectedEmployee),
-              _divider(),
-              _buildSummaryRow("Device Model", "iPhone 16 Pro"),
-              _divider(),
-              _buildSummaryRow("IP Address", "192.168.1.45"),
-              _divider(),
-              _buildSummaryRow("MAC Address", "00:1B:44:11:3A:B7"),
-              _divider(),
-              _buildSummaryRow("Location Distance", "12 Meters (On-Site)"),
-              
-              SizedBox(height: 30.h),
-              SizedBox(
-                width: double.infinity,
-                height: 52.h,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Close sheet
-                    Navigator.pop(context); // Close screen
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1D1929),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-                  ),
-                  child: Text("Confirm & Grant", style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.bold)),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
-import 'package:kunggy_operational_app/presentation/manager/tasks/widgets/task_creation_popups.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
+
+import '../widgets/task_creation_popups.dart';
 
 class CreateTaskScreen extends StatefulWidget {
   const CreateTaskScreen({super.key});

@@ -1,4 +1,4 @@
-import '../models/notification_model.dart';
+import '../../models/notification_model.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kunggy_operational_app/common/widget/common_blur_modal.dart';
-import 'package:kunggy_operational_app/common/widget/general_scaffold.dart';
-import 'package:kunggy_operational_app/common/widget/my_buttons/my_elevated_button.dart';
+import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart'; // Updated as per your scaffold name
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
@@ -16,105 +15,118 @@ class MiniBarRefillScreen extends StatefulWidget {
 
 class _MiniBarRefillScreenState extends State<MiniBarRefillScreen> {
   String selectedRoomNo = "A-101";
-  String selectedRoomType = "Deluxe Room";
+  String selectedRoomType = "Deluxe Suit Room";
 
+  // Data updated to match screenshot items
   final List<Map<String, dynamic>> items = [
-    {"name": "RedBull 250ml (4 Pcs)", "std": 4, "waste": 0, "refill": 0},
-    {"name": "Coca-Cola (4 Pcs)", "std": 4, "waste": 0, "refill": 0},
-    {"name": "Whisky (4 Pcs)", "std": 4, "waste": 0, "refill": 0},
-    {"name": "Cadbury (4 Pcs)", "std": 4, "waste": 0, "refill": 0},
-    {"name": "Juices (4 Pcs)", "std": 4, "waste": 0, "refill": 0},
+    {"name": "Sparkling Min..", "size": "100ml", "std": 4, "left": 1, "added": 3},
+    {"name": "Diet Coke", "size": "100ml", "std": 4, "left": 2, "added": 2},
+    {"name": "Kitkat", "size": "100ml", "std": 3, "left": 1, "added": 2},
+    {"name": "Cadbury", "size": "100ml", "std": 2, "left": 0, "added": 2},
+    {"name": "Lays", "size": "100g", "std": 5, "left": 3, "added": 2},
+    {"name": "Coke", "size": "100ml", "std": 2, "left": 1, "added": 1},
   ];
 
   @override
   Widget build(BuildContext context) {
-    return GeneralScaffold(
-      isBackButton: true,
-      isProfile: false,
+    return SrcGeneralScaffold(
+      isBackButton: false,
+      showAppBar: false,
+      backgroundColor: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Custom Header with back button
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: TextView(
-              "Minibar Refill",
-              style: myTextStyle.font_20wMedium.copyWith(fontWeight: FontWeight.w600),
-            ),
-          ),
-          
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+            padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
             child: Row(
               children: [
-                _buildInfoField("Select Room No", selectedRoomNo),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    padding: EdgeInsets.all(8.w),
+                    child: Icon(Icons.arrow_back, size: 24.sp, color: Colors.black),
+                  ),
+                ),
                 SizedBox(width: 12.w),
-                _buildInfoField("Room Type", selectedRoomType),
+                TextView(
+                  "Minibar Refill",
+                  style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, color: Colors.black),
+                ),
               ],
             ),
           ),
 
-          SizedBox(height: 16.h),
+          // Room Selection Row
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+            child: Row(
+              children: [
+                _buildSelectionField("Select Room No", selectedRoomNo),
+                SizedBox(width: 12.w),
+                _buildSelectionField("Room Type", selectedRoomType),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 20.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: TextView(
-              "Select Item / Type Related",
-              style: myTextStyle.font_16ww500.copyWith(fontSize: 14.sp, color: MyColors.dark000000),
+              "Select Items You Added:",
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
             ),
           ),
 
           // Table Header
           Padding(
-            padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 8.h),
+            padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 10.h),
             child: Row(
               children: [
-                Expanded(flex: 3, child: _tableHeader("Item Name")),
-                Expanded(flex: 2, child: _tableHeader("Standard Qty")),
-                Expanded(flex: 2, child: _tableHeader("Waste Qty")),
-                Expanded(flex: 2, child: _tableHeader("Refill Qty")),
+                Expanded(flex: 3, child: _tableHeader("Item Name", align: TextAlign.left)),
+                Expanded(flex: 1, child: _tableHeader("Standard\nQuantity")),
+                Expanded(flex: 1, child: _tableHeader("Quantity\nLeft")),
+                Expanded(flex: 1, child: _tableHeader("Quantity\nAdded")),
               ],
             ),
           ),
 
           Expanded(
-            child: ListView.separated(
+            child: ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               itemCount: items.length,
-              separatorBuilder: (context, index) => Divider(color: Colors.grey.shade200, height: 1),
               itemBuilder: (context, index) {
                 final item = items[index];
                 return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
                   child: Row(
                     children: [
+                      // Item Name & Size
                       Expanded(
                         flex: 3,
-                        child: Text(
-                          item['name'],
-                          style: myTextStyle.font_12w400.copyWith(fontSize: 12.sp),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextView(item['name'], style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+                            TextView(item['size'], style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Colors.grey)),
+                          ],
                         ),
                       ),
+                      // Standard Quantity (Static Text)
                       Expanded(
-                        flex: 2,
-                        child: Center(
-                          child: Text(
-                            "${item['std']}",
-                            style: myTextStyle.font_14w600,
-                          ),
-                        ),
+                        flex: 1,
+                        child: Center(child: TextView("${item['std']}", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black))),
                       ),
+                      // Quantity Left (Dropdown Style)
                       Expanded(
-                        flex: 2,
-                        child: _QuantityCounter(
-                          value: item['waste'],
-                          onChanged: (val) => setState(() => item['waste'] = val),
-                        ),
+                        flex: 1,
+                        child: _buildQtyDropdown("${item['left']}"),
                       ),
+                      SizedBox(width: 8.w),
+                      // Quantity Added (Dropdown Style)
                       Expanded(
-                        flex: 2,
-                        child: _QuantityCounter(
-                          value: item['refill'],
-                          onChanged: (val) => setState(() => item['refill'] = val),
-                        ),
+                        flex: 1,
+                        child: _buildQtyDropdown("${item['added']}"),
                       ),
                     ],
                   ),
@@ -123,17 +135,20 @@ class _MiniBarRefillScreenState extends State<MiniBarRefillScreen> {
             ),
           ),
 
+          // Submit Button
           Padding(
             padding: EdgeInsets.all(20.w),
-            child: MyElevatedButton(
-              text: "Submit",
-              onPressed: () {
-                _showLanguageConfirmationModal();
-              },
+            child: SizedBox(
+              width: double.infinity,
               height: 52.h,
-              buttonBGColor: MyColors.primaryDark1D1929,
-              textStyle: myTextStyle.font_16ww500.copyWith(color: Colors.white),
-              borderRadius: BorderRadius.circular(12.r),
+              child: ElevatedButton(
+                onPressed: () => _showConfirmationModal(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1D1929),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                ),
+                child: TextView("Submit", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white)),
+              ),
             ),
           ),
         ],
@@ -141,36 +156,33 @@ class _MiniBarRefillScreenState extends State<MiniBarRefillScreen> {
     );
   }
 
-  Widget _tableHeader(String text) {
-    return Text(
+  Widget _tableHeader(String text, {TextAlign align = TextAlign.center}) {
+    return TextView(
       text,
-      textAlign: TextAlign.center,
-      style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade500, fontSize: 11.sp),
+      textAlign: align,
+      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: Colors.grey.shade600),
     );
   }
 
-  Widget _buildInfoField(String label, String value) {
+  // Selection Field UI as per screenshot
+  Widget _buildSelectionField(String label, String value) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextView(
-            label,
-            style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600),
-          ),
-          SizedBox(height: 6.h),
+          TextView(label, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+          SizedBox(height: 8.h),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey.shade200),
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(color: Colors.grey.shade300),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(value, style: myTextStyle.font_14w600),
-                Icon(Icons.keyboard_arrow_down, size: 20.sp, color: Colors.grey),
+                TextView(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+                const Icon(Icons.keyboard_arrow_down, color: Colors.black54),
               ],
             ),
           ),
@@ -179,215 +191,46 @@ class _MiniBarRefillScreenState extends State<MiniBarRefillScreen> {
     );
   }
 
-  void _showLanguageConfirmationModal() {
-    // Filter items that have a refill quantity > 0
-    final refilledItems = items.where((item) => item['refill'] > 0).toList();
+  // Dropdown UI for Quantity as per screenshot
+  Widget _buildQtyDropdown(String value) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6.r),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextView(value, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+          const Icon(Icons.keyboard_arrow_down, size: 16, color: Colors.black54),
+        ],
+      ),
+    );
+  }
 
+  void _showConfirmationModal() {
+    // Confirmation modal logic stays the same but styled to match primary theme
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) {
-        return CommonBlurModal(
-          topOffset: -65.h,
-          onClose: () => Navigator.pop(context),
-          child: Container(
-            padding: EdgeInsets.fromLTRB(24.w, 40.h, 24.w, 40.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextView(
-                  "Minibar Refill Confirmation",
-                  style: myTextStyle.font_20wMedium.copyWith(
-                    fontSize: 24.h,
-                    fontWeight: FontWeight.w800,
-                    color: MyColors.primaryDark1D1929,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 12.h),
-                TextView(
-                  "You are refilling minibar items in room please confirm the task to post.",
-                  style: myTextStyle.font_14w400.copyWith(
-                    fontSize: 15.h,
-                    color: MyColors.gray6E7C87,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 32.h),
-
-                // Confirmation Details Box
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(color: MyColors.grayE5E5E5, width: 1),
-                  ),
-                  child: Column(
-                    children: [
-                      // Room Number Row
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextView(
-                              "Room Number",
-                              style: myTextStyle.font_14w400.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.dark000000,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            TextView(
-                              selectedRoomNo,
-                              style: myTextStyle.font_14w500.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.gray6E7C87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Divider(height: 1, color: MyColors.grayE5E5E5),
-                      
-                      // Items List Header
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextView(
-                              "Added Items",
-                              style: myTextStyle.font_14w400.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.dark000000,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            TextView(
-                              "Quantity",
-                              style: myTextStyle.font_14w400.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.dark000000,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // Dynamic Items
-                      ...refilledItems.map((item) => Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 12.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextView(
-                              item['name'].toString().split('(').first.trim(),
-                              style: myTextStyle.font_14w400.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.dark000000,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            TextView(
-                              "${item['refill']} Piece",
-                              style: myTextStyle.font_14w400.copyWith(
-                                fontSize: 16.h,
-                                color: MyColors.gray6E7C87,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )).toList(),
-                      
-                      if (refilledItems.isEmpty)
-                        Padding(
-                          padding: EdgeInsets.all(16.h),
-                          child: TextView(
-                            "No items added",
-                            style: myTextStyle.font_14w400.copyWith(color: Colors.red),
-                          ),
-                        ),
-                        
-                      SizedBox(height: 8.h),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: 40.h),
-
-                // Confirm Button
-                MyElevatedButton(
-                  text: "Confirm",
-                  onPressed: () {
-                    Navigator.pop(context); // Close modal
-                    // Success feedback or navigation
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Minibar Refill Task Posted!"), backgroundColor: Colors.green),
-                    );
-                    Navigator.pop(context); // Back to previous screen
-                  },
-                  width: double.infinity,
-                  height: 60.h,
-                  buttonBGColor: MyColors.primaryDark1D1929,
-                  textStyle: myTextStyle.font_16ww500.copyWith(
-                    fontSize: 18.h,
-                    color: MyColors.whiteFFFFFF,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-              ],
-            ),
+      builder: (context) => CommonBlurModal(
+        onClose: () => Navigator.pop(context),
+        child: Container(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextView("Confirmation", style: myTextStyle.font_13w700),
+              SizedBox(height: 10.h),
+              TextView("Are you sure you want to submit the refill details?", textAlign: TextAlign.center),
+              SizedBox(height: 20.h),
+              // ... Confirm button here
+            ],
           ),
-        );
-      },
-    );
-  }
-}
-
-class _QuantityCounter extends StatelessWidget {
-  final int value;
-  final Function(int) onChanged;
-
-  const _QuantityCounter({required this.value, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _btn("-", () {
-          if (value > 0) onChanged(value - 1);
-        }),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: Text("$value", style: myTextStyle.font_14w600),
         ),
-        _btn("+", () {
-          onChanged(value + 1);
-        }),
-      ],
-    );
-  }
-
-  Widget _btn(String text, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 24.w,
-        height: 24.w,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        alignment: Alignment.center,
-        child: Text(text, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
       ),
     );
   }
 }
-

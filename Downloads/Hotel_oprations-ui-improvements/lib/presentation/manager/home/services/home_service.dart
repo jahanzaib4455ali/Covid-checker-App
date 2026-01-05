@@ -1,4 +1,5 @@
-import '../models/home_model.dart';
+import '../../models/home_model.dart';
+
 
 class HomeService {
   static final HomeService _instance = HomeService._internal();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kunggy_operational_app/common/widget/general_scaffold.dart';
+import 'package:kunggy_operational_app/common/widget/src_general_scaffold.dart';
 import 'package:kunggy_operational_app/common/widget/text_view.dart';
 import 'package:kunggy_operational_app/theme/my_colors.dart';
 import 'package:kunggy_operational_app/theme/my_text_styles.dart';
@@ -13,234 +13,210 @@ class ReportIssueScreen extends StatefulWidget {
 }
 
 class _ReportIssueScreenState extends State<ReportIssueScreen> {
-  String selectedCategory = "Maintenance Issue";
-  String selectedRoomType = "Deluxe Room";
-  bool isRecording = false;
+  String selectedRoomNo = "A-101";
+  String selectedRoomAssets = "Electronics";
+  final TextEditingController _noteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return GeneralScaffold(
-      isBackButton: true,
-      isProfile: false,
+    return SrcGeneralScaffold(
+      isBackButton: false,
+      showAppBar: false,
+      backgroundColor: Colors.white,
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextView(
-              "Issue Report",
-              style: myTextStyle.font_20wMedium.copyWith(fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 20.h),
-            
-            _buildLabel("Select Category"),
-            _buildDropdown(selectedCategory, ["Maintenance Issue", "Cleaning Issue", "Other"]),
-            
-            SizedBox(height: 16.h),
-            _buildLabel("Select Room Type"),
-            _buildDropdown(selectedRoomType, ["Deluxe Room", "Standard Room", "Suite"]),
-            
-            SizedBox(height: 16.h),
-            _buildLabel("Short Description (Optional)"),
-            Container(
-              height: 120.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: TextField(
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: "Maintenance team requested for...",
-                  hintStyle: myTextStyle.font_14w400.copyWith(color: Colors.grey),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(12.w),
-                ),
-              ),
-            ),
-            
-            SizedBox(height: 24.h),
-            _buildLabel("Or Give voice record Note:"),
-            
-            // Voice Recorder Box
-            Container(
-              padding: EdgeInsets.all(20.w),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: Column(
+            // Custom Header with back button
+            Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
+              child: Row(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _waveBar(15.h),
-                      _waveBar(25.h),
-                      _waveBar(40.h),
-                      _waveBar(20.h),
-                      _waveBar(35.h),
-                      _waveBar(10.h),
-                      _waveBar(30.h),
-                    ],
-                  ),
-                  SizedBox(height: 12.h),
-                  TextView(
-                    "00:09",
-                    style: myTextStyle.font_14w600.copyWith(color: Colors.red),
-                  ),
-                  SizedBox(height: 16.h),
                   GestureDetector(
-                    onTap: () => setState(() => isRecording = !isRecording),
+                    onTap: () => Navigator.pop(context),
                     child: Container(
-                      width: 60.w,
-                      height: 60.w,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        isRecording ? Icons.stop : Icons.mic,
-                        color: Colors.white,
-                        size: 30.sp,
-                      ),
+                      padding: EdgeInsets.all(8.w),
+                      child: Icon(Icons.arrow_back, size: 24.sp, color: Colors.black),
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(width: 12.w),
                   TextView(
-                    isRecording ? "Stop Recording" : "Tap to Record",
-                    style: myTextStyle.font_12w400.copyWith(color: Colors.grey),
+                    "Issue Report",
+                    style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w700, color: Colors.black),
                   ),
                 ],
               ),
             ),
             
             SizedBox(height: 30.h),
-            SizedBox(
-              width: double.infinity,
-              height: 52.h,
-              child: ElevatedButton(
-                onPressed: () {
-                  _showConfirmation();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MyColors.primaryDark1D1929,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            
+            // Select Room No
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextView(
+                    "Select Room No",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildDropdownField(selectedRoomNo, ["A-101", "A-102", "A-103"]),
+                ],
+              ),
+            ),
+            
+            SizedBox(height: 24.h),
+            
+            // Select Room Assets
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextView(
+                    "Select Room Assets",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildDropdownField(selectedRoomAssets, ["Electronics", "Furniture", "Bathroom", "Other"]),
+                ],
+              ),
+            ),
+            
+            SizedBox(height: 24.h),
+            
+            // Write or Record Issue
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextView(
+                    "Write or Record Issue",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.mic, color: Colors.white, size: 16.sp),
+                        SizedBox(width: 4.w),
+                        TextView(
+                          "Voice",
+                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            SizedBox(height: 12.h),
+            
+            // Text Area
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Container(
+                height: 200.h,
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: Colors.grey.shade300),
                 ),
-                child: TextView(
-                  "Report",
-                  style: myTextStyle.font_16ww500.copyWith(color: Colors.white),
+                child: TextField(
+                  controller: _noteController,
+                  maxLines: null,
+                  expands: true,
+                  decoration: InputDecoration(
+                    hintText: "Write Note........",
+                    hintStyle: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey.shade400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
                 ),
               ),
             ),
+            
+            SizedBox(height: 40.h),
+            
+            // Report Button
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: SizedBox(
+                width: double.infinity,
+                height: 52.h,
+                child: ElevatedButton(
+                  onPressed: () => _showConfirmation(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1D1929),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                  ),
+                  child: TextView(
+                    "Report",
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            
+            SizedBox(height: 100.h), // Bottom spacing
           ],
         ),
       ),
     );
   }
 
-  Widget _buildLabel(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: TextView(
-        text,
-        style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600),
-      ),
-    );
-  }
-
-  Widget _buildDropdown(String value, List<String> items) {
+  Widget _buildDropdownField(String value, List<String> items) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(color: Colors.grey.shade300),
       ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: value,
-          isExpanded: true,
-          items: items.map((e) => DropdownMenuItem(value: e, child: Text(e, style: myTextStyle.font_14w600))).toList(),
-          onChanged: (val) {
-            if (val != null) setState(() => selectedCategory = val);
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _waveBar(double height) {
-    return Container(
-      width: 4.w,
-      height: height,
-      margin: EdgeInsets.symmetric(horizontal: 2.w),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(2),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextView(
+            value,
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.black),
+          ),
+          Icon(Icons.keyboard_arrow_down, color: Colors.black54, size: 24.sp),
+        ],
       ),
     );
   }
 
   void _showConfirmation() {
+    // Simple confirmation dialog
     showDialog(
       context: context,
-      builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: EdgeInsets.all(20.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-              ),
-              TextView("Issue Report Confirmation", style: myTextStyle.font_18w600),
-              SizedBox(height: 8.h),
-              TextView(
-                "You are refining Ambience/Amenities for Room A-101, please confirm your entry before submit.",
-                textAlign: TextAlign.center,
-                style: myTextStyle.font_12w400.copyWith(color: Colors.grey),
-              ),
-              SizedBox(height: 20.h),
-              _confirmRow("Room Number", "A-101"),
-              _confirmRow("Room Type", "Deluxe Room"),
-              _confirmRow("Issue Type", "Maintenance"),
-              const Divider(),
-              TextView("Voice record Added Successfully", style: myTextStyle.font_12w400.copyWith(color: Colors.green)),
-              SizedBox(height: 30.h),
-              SizedBox(
-                width: double.infinity,
-                height: 48.h,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.primaryDark1D1929,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: TextView("Confirm", style: myTextStyle.font_14w500.copyWith(color: Colors.white)),
-                ),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: TextView("Confirmation", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
+        content: TextView("Are you sure you want to submit the issue report?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: TextView("Cancel"),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _confirmRow(String label, String value) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: myTextStyle.font_12w400.copyWith(color: Colors.grey.shade600)),
-          Text(value, style: myTextStyle.font_14w600),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1D1929)),
+            child: TextView("Confirm", style: TextStyle(color: Colors.white)),
+          ),
         ],
       ),
     );
